@@ -1,0 +1,120 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: multi-purpose-convention
+
+---
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: multi-purpose-convention-selfsigned-issuer
+  namespace: multi-purpose-convention
+spec:
+  selfSigned: {}
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: multi-purpose-convention-webhook-cert
+  namespace: multi-purpose-convention
+spec:
+  subject:
+    organizations:
+    - vmware
+    organizationalUnits:
+    - tanzu
+  commonName: multi-purpose-convention-webhook.multi-purpose-convention.svc
+  dnsNames:
+  - multi-purpose-convention-webhook.multi-purpose-convention.svc
+  - multi-purpose-convention-webhook.multi-purpose-convention.svc.cluster.local
+  issuerRef:
+    kind: Issuer
+    name: multi-purpose-convention-selfsigned-issuer
+  secretName: multi-purpose-convention-webhook-cert
+  revisionHistoryLimit: 10
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: multi-purpose-convention-webhook
+  namespace: multi-purpose-convention
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: multi-purpose-convention-webhook
+  template:
+    metadata:
+      labels:
+        app: multi-purpose-convention-webhook
+    spec:
+      containers:
+      - name: webhook
+<<<<<<< Updated upstream
+        image: registry.harbor.learn.tapsme.org/convention-service/multi-purpose-convention@sha256:a0a266152c1447090dd98f7b3c6c841323b57ba4d73a01b776c81490fb38a358
+=======
+        image: registry.harbor.learn.tapsme.org/convention-service/multi-purpose-convention@sha256:a0a266152c1447090dd98f7b3c6c841323b57ba4d73a01b776c81490fb38a358
+>>>>>>> Stashed changes
+        imagePullPolicy: Always
+        env:
+        - name: PORT
+          value: "8443"
+        - name: ANNOTATION_PREFIX
+          value: "x95castle1.org"
+        ports:
+        - containerPort: 8443
+          name: webhook
+        livenessProbe:
+          httpGet:
+            scheme: HTTPS
+            port: webhook
+            path: /healthz
+        readinessProbe:
+          httpGet:
+            scheme: HTTPS
+            port: webhook
+            path: /healthz
+        resources:
+          limits:
+            cpu: 100m
+            memory: 256Mi
+          requests:
+            cpu: 100m
+            memory: 20Mi
+        volumeMounts:
+        - name: certs
+          mountPath: /config/certs
+          readOnly: true
+      volumes:
+        - name: certs
+          secret:
+            defaultMode: 420
+            secretName: multi-purpose-convention-webhook-cert
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: multi-purpose-convention-webhook
+  namespace: multi-purpose-convention
+spec:
+  selector:
+    app: multi-purpose-convention-webhook
+  ports:
+    - protocol: TCP
+      port: 443
+      targetPort: webhook
+---
+apiVersion: conventions.carto.run/v1alpha1
+kind: ClusterPodConvention
+metadata:
+  name: multi-purpose-convention
+spec:
+  webhook:
+    certificate:
+      namespace: multi-purpose-convention
+      name: multi-purpose-convention-webhook-cert
+    clientConfig:
+      service:
+        name: multi-purpose-convention-webhook
+        namespace: multi-purpose-convention

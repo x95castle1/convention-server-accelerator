@@ -1,0 +1,38 @@
+accelerator:
+  displayName: Convention Server Template
+  description: Tanzu Application Platform Accelerator to spin up a new service for the micropets app
+  iconUrl: https://github.com/bmoussaud/micropets-golang-service-accelerator/raw/main/pet-silhouette-icons.png
+  tags:
+    - golang    
+    - micropets
+  options:
+    - name: petKind
+      label: "Kind"
+      display: true
+      defaultValue: Snake
+      required: true    
+    - name: imageRegistry
+      label: Image registry
+      description: the image registry 
+      dataType: string
+      defaultValue: akseutap2registry.azurecr.io
+engine:
+  merge:   
+    - include: ["config/**", "README.md","git-push.sh","Tiltfile","**/*.go","go.mod","go.sum",".tanzuignore","catalog-info.yaml"]
+      chain:
+        - type: ReplaceText
+          substitutions:
+            - text: my-petservice
+              with: "#petKind.toLowerCase()+ 's'" 
+            - text: PetKind
+              with: "#petKind"
+            - text: lowercasePetKind
+              with: "#petKind.toLowerCase()+ 's'" 
+            - text: imageRegistry
+              with: "#imageRegistry.toLowerCase()"
+            - text: petkind
+              with: "#petKind.toLowerCase()+ 's'"
+  chain:
+    - type: RewritePath
+      regex: (.*)PetKind(.*)
+      rewriteTo: "#g1 + #petKind + #g2"

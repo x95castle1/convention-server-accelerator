@@ -1,10 +1,10 @@
 accelerator:
   displayName: Convention Server Template
-  description: Tanzu Application Platform Accelerator to spin up a new service for the micropets app
-  iconUrl: https://github.com/bmoussaud/micropets-golang-service-accelerator/raw/main/pet-silhouette-icons.png
+  description: Tanzu Application Platform Accelerator to create your own Convention Server for a Supply Chain
+  iconUrl: https://raw.githubusercontent.com/x95castle1/convention-server-accelerator/main/convention.jpeg
   tags:
     - golang    
-    - micropets
+    - convention
   options:
     - name: petKind
       label: "Kind"

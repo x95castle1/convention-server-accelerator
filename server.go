@@ -11,7 +11,7 @@ import (
 
 	"github.com/x95castle1/convention-server-framework/pkg/handler"
 
-	"github.com/x95castle1/multi-purpose-convention-server/pkg/conventions"
+	"multi-purpose-convention-server/pkg/conventions"
 
 	"github.com/go-logr/logr"
 	"github.com/go-logr/zapr"

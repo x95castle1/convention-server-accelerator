@@ -14,7 +14,7 @@ accelerator:
       required: true    
 engine:
   merge:   
-    - include: ["**/*.go","go.mod","go.sum"]
+    - include: ["**/*.go","**/go.mod","**/go.sum"]
       chain:
         - type: ReplaceText
           substitutions:

@@ -6,7 +6,7 @@ GOBIN=$(shell go env GOBIN)
 endif
 
 GOIMPORTS ?= go run -modfile hack/go.mod golang.org/x/tools/cmd/goimports
-DOCKER_ORG ?= registry.harbor.learn.tapsme.org/convention-service
+DOCKER_ORG ?= IMAGE_REGISTRY_PLACEHOLDER_URL
 DEV_IMAGE_LOCATION ?= harbor-repo.vmware.com/tanzu_practice/conventions/multi-purpose-convention-server-bundle-repo
 PROMOTION_IMAGE_LOCATION ?= projects.registry.vmware.com/tanzu_practice/conventions/multi-purpose-convention-server-bundle-repo
 INSTALL_NAMESPACE ?= multi-purpose-convention
@@ -34,7 +34,7 @@ test: fmt vet ## Run tests
 
 .PHONY: fmt
 fmt: ## Run go fmt against code
-	$(GOIMPORTS) --local github.com/x95castle1/multi-purpose-convention-server -w .
+	$(GOIMPORTS) --local multi-purpose-convention-server -w .
 
 .PHONY: vet
 vet: ## Run go vet against code

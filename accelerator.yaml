@@ -12,9 +12,15 @@ accelerator:
       display: true
       defaultValue: convention-server.tap.example.com
       required: true
+    - name: imageRegistry
+      label: "Image Registry Path"
+      description: "Full registry url where this convention server will be released"
+      display: true
+      defaultValue: harbor.example.com/tap/conventions/example-server
+      required: true
 engine:
   merge:   
-    - include: ["**/*.go","**/go.mod","**/go.sum", "README.md"]
+    - include: ["**/*.go","**/go.mod","**/go.sum", "README.md", "Makefile"]
       chain:
         - type: ReplaceText
           substitutions:
@@ -24,3 +30,9 @@ engine:
           substitutions:
             - text: multi-purpose-convention
               with: "#artifactId.toLowerCase()"
+    - include: ["Makefile", "install-server/server-it.yaml", "README.md"]
+      chain:
+        - type: ReplaceText
+          substitutions:
+            - text: IMAGE_REGISTRY_PLACEHOLDER_URL
+              with: "#imageRegistry"

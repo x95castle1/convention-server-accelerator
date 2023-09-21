@@ -266,14 +266,14 @@ This project has `Makefile` to `make` life easier for you.
 
 ### Variables
 
-* `DOCKER_ORG` - The location to push the image built by the Makefile. Default: `registry.harbor.learn.tapsme.org/convention-service`
+* `DOCKER_ORG` - The location to push the image built by the Makefile. Default: `IMAGE_REGISTRY_PLACEHOLDER_URL`
 * `DEV_IMAGE_LOCATION` - The image registry to push the carvel bundle. This is a staging repo. Default: `harbor-repo.vmware.com/tanzu_practice/conventions/multi-purpose-convention-server-bundle-repo`
 * `PROMOTION_IMAGE_LOCATION` - The image registry to imgpkg copy to make the carvel bundle publically available. Default: `projects.registry.vmware.com/tanzu_practice/conventions/multi-purpose-convention-server-bundle-repo`
 * `INSTALL_NAMESPACE` - Namespace where the bundle is installed. Used to restart the pods. Default: `multi-purpose-convention`
 * `CONVENTION_NAME` - Name of the image repository project. Appended to DOCKER_ORG variable. Default:  `multi-purpose-convention`
 
 ```shell
-export DOCKER_ORG=registry.harbor.learn.tapsme.org/convention-service
+export DOCKER_ORG=IMAGE_REGISTRY_PLACEHOLDER_URL
 ```
 
 ### make build 
@@ -289,7 +289,7 @@ make build
 Uses `pack cli` to build image and publish to the `DOCKER_ORG` location. 
 
 ```shell
-export DOCKER_ORG=registry.harbor.learn.tapsme.org/convention-service
+export DOCKER_ORG=IMAGE_REGISTRY_PLACEHOLDER_URL
 
 make image
 ```

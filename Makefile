@@ -6,9 +6,9 @@ GOBIN=$(shell go env GOBIN)
 endif
 
 GOIMPORTS ?= go run -modfile hack/go.mod golang.org/x/tools/cmd/goimports
-DOCKER_ORG ?= IMAGE_REGISTRY_PLACEHOLDER_URL
-DEV_IMAGE_LOCATION ?= harbor-repo.vmware.com/tanzu_practice/conventions/multi-purpose-convention-server-bundle-repo
-PROMOTION_IMAGE_LOCATION ?= projects.registry.vmware.com/tanzu_practice/conventions/multi-purpose-convention-server-bundle-repo
+DOCKER_ORG ?= CONVENTION_IMAGE_REGISTRY_PLACEHOLDER_URL
+STAGING_IMAGE_LOCATION ?= STAGING_PACKAGE_IMAGE_REGISTRY_PLACEHOLDER_URL
+RELEASE_IMAGE_LOCATION ?= RELEASE_PACKAGE_IMAGE_REGISTRY_PLACEHOLDER_URL
 INSTALL_NAMESPACE ?= multi-purpose-convention
 CONVENTION_NAME ?= multi-purpose-convention
 
@@ -89,7 +89,7 @@ package:
 
 .PHONY: promote
 promote:
-	imgpkg --tty copy -b $(DEV_IMAGE_LOCATION):$(LATEST_TAG) --to-repo $(PROMOTION_IMAGE_LOCATION) --registry-response-header-timeout 1m --registry-retry-count 2
+	imgpkg --tty copy -b $(STAGING_IMAGE_LOCATION):$(LATEST_TAG) --to-repo $(RELEASE_IMAGE_LOCATION) --registry-response-header-timeout 1m --registry-retry-count 2
 
 .PHONY: tag
 tag:

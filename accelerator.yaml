@@ -12,11 +12,23 @@ accelerator:
       display: true
       defaultValue: convention-server.tap.example.com
       required: true
-    - name: imageRegistry
-      label: "Image Registry Path"
+    - name: conventionImageRegistry
+      label: "Convention Server Image Registry Path"
       description: "Full registry url where this convention server will be released"
       display: true
       defaultValue: harbor.example.com/tap/conventions/example-server
+      required: true
+    - name: stagingPackageImageRegistry
+      label: "Staging Package Image Registry Path"
+      description: "Full registry url where the package for the convention will be staged before release"
+      display: true
+      defaultValue: harbor.example-staging.com/tap/conventions/example-server-repo-bundle
+      required: true
+    - name: releasePackageImageRegistry
+      label: "Release Package Image Registry Path"
+      description: "Full registry url where this package for the convention server will be released to the WORLD!"
+      display: true
+      defaultValue: harbor.example.com/tap/conventions/example-server-repo-bundle
       required: true
 engine:
   merge:   
@@ -32,5 +44,13 @@ engine:
               with: "#artifactId.toLowerCase()"
         - type: ReplaceText
           substitutions:
-            - text: IMAGE_REGISTRY_PLACEHOLDER_URL
-              with: "#imageRegistry"
+            - text: CONVENTION_IMAGE_REGISTRY_PLACEHOLDER_URL
+              with: "#conventionImageRegistry"
+        - type: ReplaceText
+          substitutions:
+            - text: STAGING_PACKAGE_IMAGE_REGISTRY_PLACEHOLDER_URL
+              with: "#stagingPackageImageRegistry"
+        - type: ReplaceText
+          substitutions:
+            - text: RELEASE_PACKAGE_IMAGE_REGISTRY_PLACEHOLDER_URL
+              with: "#releasePackageImageRegistry"

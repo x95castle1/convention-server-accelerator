@@ -20,3 +20,7 @@ engine:
           substitutions:
             - text: multi-purpose-convention-server
               with: "#artifactId.toLowerCase()" 
+        - type: ReplaceText
+          substitutions:
+            - text: multi-purpose-convention
+              with: "#artifactId.toLowerCase()" 

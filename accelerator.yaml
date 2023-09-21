@@ -14,7 +14,7 @@ accelerator:
       required: true    
 engine:
   merge:   
-    - include: ["**/*.go","**/go.mod","**/go.sum"]
+    - include: ["**/*.go","**/go.mod","**/go.sum", "README.md"]
       chain:
         - type: ReplaceText
           substitutions:
@@ -23,4 +23,4 @@ engine:
         - type: ReplaceText
           substitutions:
             - text: multi-purpose-convention
-              with: "#artifactId.toLowerCase()" 
+              with: "#artifactId.toLowerCase()"

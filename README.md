@@ -1,12 +1,9 @@
-# Multi-Purpose Convention Server
+# multi-purpose-convention-server
 
-A sample convention server for adding in liveiness/readiness/startup probes, volumes/volume mounts, container arguments, node affinity, tolerations, and environment variables to a pod spec for a TAP workload.
-
-**Disclaimer:** This is not an officially supported Convention Service from VMware.
 
 ## Component Overview
 
-This project can be used as a template/exemplar to create your own conventions for a Supply Chain. Boilerplate code with a handler and convention interface has been moved to the convention-server-framework package. To reuse this code you just need to implement your own convention.go logic. 
+A sample convention server....add a description here
 
 ### server.go
 
@@ -21,8 +18,6 @@ This contains the logic for your conventions. Each convention is part of variabl
 ## Convention Architecture
 
 [Cartographer Convention Documentation](https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.6/tap/cartographer-conventions-about.html)
-
-![arch](images/convention-architecture.jpg)
 
 ## Prequisites
 
@@ -43,21 +38,19 @@ pack config default-builder paketobuildpacks/builder-jammy-tiny
 * [Kctrl CLI](https://github.com/carvel-dev/carvel) - Needed for bundling and releasing as a Carvel Package
 
 * [jq](https://jqlang.github.io/jq/)
-
+```shell
+brew install jq
+```
 * [gsed](https://formulae.brew.sh/formula/gnu-sed)
+```shell
+brew install gsed
+```
 
 ## Available Options
 
 | Annotation | Description | 
 | --- | --- |
-| `example.com/livenessProbe` | define a liveness probe | 
 | `example.com/readinessProbe` | define a readiness probe |
-| `example.com/startupProbe` | define a startup probe |
-| `example.com/storage` | define volume and volume mounts |
-| `example.com/args` | define container args |
-| `example.com/tolerations` | define tolerations for a pod |
-| `example.com/nodeSelector` | define a node selector for a pod |
-| `example.com/affinity` | define scheduling affinity for a pod |
 
 ## Example Annotations for a Workload
 
@@ -66,14 +59,7 @@ spec:
   params:
   - name: annotations
     value:
-      example.com/livenessProbe: '{"exec":{"command":["cat","/tmp/healthy"]},"initialDelaySeconds":5,"periodSeconds":5}'
       example.com/readinessProbe: '{"httpGet":{"path":"/healthz","port":8080},"initialDelaySeconds":5,"periodSeconds":5}'
-      example.com/startupProbe: '{"httpGet":{"path":"/healthz","port":"liveness-port"},"failureThreshold":30,"periodSeconds":10}'
-      example.com/storage: '{"volumes":[{"name":"config-vol","configMap":{"name":"log-config","items":[{"key":"log_level","path":"log_level"}]}}],"volumeMounts":[{"name":"config-vol","mountPath":"/etc/config"}]}'
-      example.com/args: '{["HOSTNAME","KUBERNETES_PORT"]}'
-      example.com/tolerations: '[{"key":"rabeyta","operator":"Exists","effect":"NoSchedule"}]'
-      example.com/nodeSelector: '{"disktype":"ssd"}'
-      example.com/affinity: '{"nodeAffinity":{"requiredDuringSchedulingIgnoredDuringExecution":{"nodeSelectorTerms":[{"matchExpressions":[{"key":"topology.kubernetes.io/zone","operator":"In","values":["antarctica-east1","antarctica-west1"]}]}]},"preferredDuringSchedulingIgnoredDuringExecution":[{"weight":1,"preference":{"matchExpressions":[{"key":"another-node-label-key","operator":"In","values":["another-node-label-value"]}]}}]}}'
 
 ```
 
@@ -94,12 +80,11 @@ metadata:
     app.kubernetes.io/part-of: app-golang-kpack
     apps.tanzu.vmware.com/workload-type: web
   name: convention-workload
-  namespace: jeremy
+  namespace: demo
 spec:
   params:
   - name: annotations
     value:
-      example.com/livenessProbe: '{"exec":{"command":["cat","/tmp/healthy"]},"initialDelaySeconds":5,"periodSeconds":5}'
       example.com/readinessProbe: '{"httpGet":{"path":"/healthz","port":8080},"initialDelaySeconds":5,"periodSeconds":5}'
   source:
     git:
@@ -117,13 +102,6 @@ You can find more examples in the [workload-examples folder](/workload-examples/
 spec:
   containers:
   - image: gcr.io/ship-interfaces-dev/supply-chain/app-golang-kpack-dev@sha256:3830de13d0a844420caa3d0a8d77ee1ca5b05897a273465c682032522fc331b5
-    livenessProbe:
-      exec:
-        command:
-        - cat
-        - /tmp/healthy
-      initialDelaySeconds: 5
-      periodSeconds: 5
     name: workload
     readinessProbe:
       httpGet:

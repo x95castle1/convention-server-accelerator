@@ -20,7 +20,7 @@ accelerator:
       required: true
 engine:
   merge:   
-    - include: ["**/*.go","**/go.mod","**/go.sum", "README.md", "Makefile"]
+    - include: ["**/*.go","**/go.mod","**/go.sum", "README.md", "Makefile", "install-server/server-it.yaml"]
       chain:
         - type: ReplaceText
           substitutions:
@@ -30,8 +30,6 @@ engine:
           substitutions:
             - text: multi-purpose-convention
               with: "#artifactId.toLowerCase()"
-    - include: ["Makefile", "install-server/server-it.yaml", "README.md"]
-      chain:
         - type: ReplaceText
           substitutions:
             - text: IMAGE_REGISTRY_PLACEHOLDER_URL

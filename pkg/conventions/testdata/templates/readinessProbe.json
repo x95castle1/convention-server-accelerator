@@ -2,7 +2,7 @@
   "metadata": {
     "creationTimestamp": null,
     "annotations": {
-      "x95castle1.org/readinessProbe": "{\"exec\":{\"command\":[\"cat\",\"/tmp/healthy\"]},\"initialDelaySeconds\":5,\"periodSeconds\":5}"
+      "example.com/readinessProbe": "{\"exec\":{\"command\":[\"cat\",\"/tmp/healthy\"]},\"initialDelaySeconds\":5,\"periodSeconds\":5}"
     }
   },
   "spec": {

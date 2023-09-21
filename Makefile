@@ -29,7 +29,7 @@ build: test ## Build the project
 
 .PHONY: test
 test: fmt vet ## Run tests
-	$(eval export  ANNOTATION_PREFIX=x95castle1.org)
+	$(eval export  ANNOTATION_PREFIX=example.com)
 	go test ./... -coverprofile cover.out
 
 .PHONY: fmt

@@ -11,7 +11,7 @@ accelerator:
       label: "Package Name"
       display: true
       defaultValue: convention-server.tap.example.com
-      required: true    
+      required: true
 engine:
   merge:   
     - include: ["**/*.go","**/go.mod","**/go.sum", "README.md"]

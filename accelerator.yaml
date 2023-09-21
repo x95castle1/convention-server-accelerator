@@ -5,29 +5,18 @@ accelerator:
   tags:
     - golang    
     - convention
+    - supplychain
   options:
     - name: packageName
       label: "Package Name"
       display: true
-      defaultValue: convention-server.vmware.com
+      defaultValue: convention-server.tap.example.com
       required: true    
 engine:
   merge:   
-    - include: ["config/**", "README.md","git-push.sh","Tiltfile","**/*.go","go.mod","go.sum",".tanzuignore","catalog-info.yaml"]
+    - include: ["**/*.go","go.mod","go.sum"]
       chain:
         - type: ReplaceText
           substitutions:
-            - text: my-petservice
-              with: "#petKind.toLowerCase()+ 's'" 
-            - text: PetKind
-              with: "#petKind"
-            - text: lowercasePetKind
-              with: "#petKind.toLowerCase()+ 's'" 
-            - text: imageRegistry
-              with: "#imageRegistry.toLowerCase()"
-            - text: petkind
-              with: "#petKind.toLowerCase()+ 's'"
-  chain:
-    - type: RewritePath
-      regex: (.*)PetKind(.*)
-      rewriteTo: "#g1 + #petKind + #g2"
+            - text: multi-purpose-convention-server
+              with: "#artifactId.toLowerCase()" 

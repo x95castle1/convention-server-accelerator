@@ -10,7 +10,7 @@ DOCKER_ORG ?= IMAGE_REGISTRY_PLACEHOLDER_URL
 DEV_IMAGE_LOCATION ?= harbor-repo.vmware.com/tanzu_practice/conventions/multi-purpose-convention-server-bundle-repo
 PROMOTION_IMAGE_LOCATION ?= projects.registry.vmware.com/tanzu_practice/conventions/multi-purpose-convention-server-bundle-repo
 INSTALL_NAMESPACE ?= multi-purpose-convention
-CONVENTION_NAME ?= multi-purpose-convention# rename maybe to image name
+CONVENTION_NAME ?= multi-purpose-convention
 
 # TAG LOGIC
 LATEST_TAG := $(shell git tag | sort -r --version-sort | head -n1)

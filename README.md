@@ -156,7 +156,7 @@ your own container image registry before installing.
     - `MY-REGISTRY-USER` is the user with write access to MY-REGISTRY.
     - `MY-REGISTRY-PASSWORD` is the password for `MY-REGISTRY-USER`.
     - `MY-REGISTRY` is your own registry.
-    - `VERSION` is your Multi-Purpose-Convention-Server version. For example, `0.4.0`.
+    - `VERSION` is your multi-purpose-convention-server version. For example, `0.4.0`.
     - `TARGET-REPOSITORY` is your target repository, a directory or repository on
       `MY-REGISTRY` that serves as the location for the installation files for
       the conventions.
@@ -167,7 +167,7 @@ your own container image registry before installing.
     imgpkg copy -b projects.registry.vmware.com/tanzu_practice/conventions/multi-purpose-convention-server-bundle-repo:${VERSION} --to-repo ${INSTALL_REGISTRY_HOSTNAME}/${INSTALL_REPO}/multi-purpose-convention-server-bundle-repo
     ```
 
-3. Add Multi-Purpose-Convention-Server package repository to the cluster by running:
+3. Add multi-purpose-convention-server package repository to the cluster by running:
 
     ```shell
     tanzu package repository add multi-purpose-conventions-repository \
@@ -175,7 +175,7 @@ your own container image registry before installing.
       --namespace tap-install
     ```
 
-4. Get the status of Multi-Purpose-Convention-Server  package repository, and ensure that the status updates to `Reconcile succeeded` by running:
+4. Get the status of multi-purpose-convention-server  package repository, and ensure that the status updates to `Reconcile succeeded` by running:
 
 
     ```shell
@@ -228,9 +228,9 @@ by using the following configuration:
 
   Where:
 
-  - `ANNOTATION-PREFIX` is the prefix you want to use on your annotation used in the workload. For example: `x95castle1` Defaults to `example.com`.
+  - `ANNOTATION-PREFIX` is the prefix you want to use on your annotation used in the workload. Defaults to `example.com`.
 
-### Install Multi-Purpose-Convention-Server
+### Install multi-purpose-convention-server
 
 Define the `--values-file` flag to customize the default configuration (Optional):
 

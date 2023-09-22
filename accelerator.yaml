@@ -58,7 +58,7 @@ engine:
     - include: ["**/*.go",
                 "**/go.mod",
                 "**/go.sum",
-                "pkg/*.json",
+                "pkg/**/*.json",
                 "README.md",
                 "Makefile",
                 "install-server/**",

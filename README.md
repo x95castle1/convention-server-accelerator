@@ -46,6 +46,15 @@ brew install jq
 brew install gsed
 ```
 
+Logged into staging registry
+```shell
+
+```
+Logged into production registry
+```shell
+
+```
+
 ## Available Options
 
 | Annotation | Description | 

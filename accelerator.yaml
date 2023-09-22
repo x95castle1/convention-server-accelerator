@@ -55,7 +55,17 @@ accelerator:
       required: true
 engine:
   merge:   
-    - include: ["**/*.go","**/go.mod","**/go.sum", "README.md", "Makefile", "install-server/server-it.yaml"]
+    - include: ["**/*.go",
+                "**/go.mod",
+                "**/go.sum",
+                "pkg/*.json",
+                "README.md",
+                "Makefile",
+                "install-server/**",
+                "carvel/**",
+                "examples/**",
+                ".gitignore"
+    ]
       chain:
         - type: ReplaceText
           substitutions:

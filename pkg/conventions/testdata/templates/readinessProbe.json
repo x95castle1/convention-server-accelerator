@@ -2,7 +2,7 @@
   "metadata": {
     "creationTimestamp": null,
     "annotations": {
-      "example.com/readinessProbe": "{\"exec\":{\"command\":[\"cat\",\"/tmp/healthy\"]},\"initialDelaySeconds\":5,\"periodSeconds\":5}"
+      "CONVENTION_PREFIX_PLACEHOLDER/readinessProbe": "{\"exec\":{\"command\":[\"cat\",\"/tmp/healthy\"]},\"initialDelaySeconds\":5,\"periodSeconds\":5}"
     }
   },
   "spec": {

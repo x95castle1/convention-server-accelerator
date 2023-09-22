@@ -65,4 +65,4 @@ engine:
         - type: ReplaceText
           substitutions:
             - text: CONVENTION_IMAGE_REGISTRY_PLACEHOLDER_ESCAPED_URL
-              with: '#conventionImageRegistry.replace("/", "\\/")'
+              with: '#conventionImageRegistry.replace("/", "\/")'

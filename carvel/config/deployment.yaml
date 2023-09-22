@@ -28,7 +28,7 @@ spec:
             runAsUser: 1000
           #@ end
             allowPrivilegeEscalation: false
-          image: CONVENTION_SERVER_IMAGE_PLACEHOLDER
+          image: multi-purpose-convention@sha
           imagePullPolicy: Always
           env:
             - name: PORT

@@ -51,7 +51,7 @@ spec:
     spec:
       containers:
       - name: webhook
-        image: CONVENTION_SERVER_IMAGE_PLACEHOLDER
+        image: multi-purpose-convention@sha
         imagePullPolicy: Always
         env:
         - name: PORT

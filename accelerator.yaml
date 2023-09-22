@@ -61,4 +61,4 @@ engine:
         - type: ReplaceText
           substitutions:
             - text: PACKAGE_SHORT_NAME_PLACEHOLDER
-              with: "#packageName.substringBefore('.')"
+              with: "#packageName.substring(0, input.indexOf('.'))"

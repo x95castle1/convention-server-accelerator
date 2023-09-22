@@ -62,3 +62,7 @@ engine:
           substitutions:
             - text: PACKAGE_SHORT_NAME_PLACEHOLDER
               with: "#packageName.substring(0, #packageName.indexOf('.'))"
+        - type: ReplaceText
+          substitutions:
+            - text: CONVENTION_IMAGE_REGISTRY_PLACEHOLDER_ESCAPED_URL
+              with: '#conventionImageRegistry.replace("/", "\\/")'

@@ -120,8 +120,8 @@ updateTemplateImage:
 	echo $(IMAGE_URL)
 	$(eval LATEST_DIGEST=$(shell curl -X GET $(IMAGE_URL) -H 'accept: application/json' | jq -r .digest))
 	echo $(LATEST_DIGEST)
-	gsed -i "s/.*convention-service\/multi-purpose-convention.*/          image: registry.harbor.learn.tapsme.org\/convention-service\/multi-purpose-convention@${LATEST_DIGEST}/g" ./carvel/config/deployment.yaml
-	gsed -i "s/.*convention-service\/multi-purpose-convention.*/        image: registry.harbor.learn.tapsme.org\/convention-service\/multi-purpose-convention@${LATEST_DIGEST}/g" ./install-server/server-it.yaml
+	gsed -i "s/.*CONVENTION_SERVER_IMAGE_PLACEHOLDER.*/          image: CONVENTION_IMAGE_REGISTRY_PLACEHOLDER_ESCAPED_URL@${LATEST_DIGEST}/g" ./carvel/config/deployment.yaml
+	gsed -i "s/.*CONVENTION_SERVER_IMAGE_PLACEHOLDER.*/        image: CONVENTION_IMAGE_REGISTRY_PLACEHOLDER_ESCAPED_URL@${LATEST_DIGEST}/g" ./install-server/server-it.yaml
 
 .PHONY: updateGoDeps
 updateGoDeps:

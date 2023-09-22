@@ -42,7 +42,7 @@ vet: ## Run go vet against code
 
 .PHONY: image
 image:
-	pack build --publish $(DOCKER_ORG)/$(CONVENTION_NAME):$(LATEST_TAG)
+	pack build --publish $(DOCKER_ORG):$(LATEST_TAG)
 
 .PHONY: install
 install: test ## Install conventions server
@@ -118,6 +118,7 @@ stashPop:
 updateTemplateImage:
 	$(eval IMAGE_URL="CONVENTION_IMAGE_REGISTRY_PLACEHOLDER_URL:$(LATEST_TAG)")
 	echo $(IMAGE_URL)
+	docker pull $(IMAGE_URL)
 	$(eval LATEST_DIGEST=$(shell docker inspect $(IMAGE_URL) | jq -r '.[0].RepoDigests[0]'))
 	echo $(LATEST_DIGEST)
 	gsed -i "s/.*multi-purpose-convention@sha.*/          image: ${LATEST_DIGEST}/g" ./carvel/config/deployment.yaml

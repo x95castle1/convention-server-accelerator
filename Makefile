@@ -116,7 +116,7 @@ stashPop:
 
 .PHONY: updateTemplateImage
 updateTemplateImage:
-	$(eval IMAGE_URL="CONVENTION_IMAGE_REGISTRY_PLACEHOLDER_URL")
+	$(eval IMAGE_URL="CONVENTION_IMAGE_REGISTRY_PLACEHOLDER_URL:$(LATEST_TAG)")
 	echo $(IMAGE_URL)
 	$(eval LATEST_DIGEST=$(shell docker inspect $(IMAGE_URL) | jq -r '.[0].RepoDigests[0]'))
 	echo $(LATEST_DIGEST)

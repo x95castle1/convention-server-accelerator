@@ -70,7 +70,7 @@ applyp: ## apply package repository and then install the package
 	--url RELEASE_PACKAGE_IMAGE_REGISTRY_PLACEHOLDER_URL/multi-purpose-convention-server-bundle-repo:$(LATEST_TAG) \
 	--namespace tap-install \
 	--yes
-	tanzu package install multi-purpose-convention-server  \
+	tanzu package install PACKAGE_SHORT_NAME_PLACEHOLDER \
   	--package PACKAGE_NAME_PLACEHOLDER \
   	--values-file ./examples/package/values.yaml \
   	--version $(LATEST_TAG) \
@@ -79,7 +79,7 @@ applyp: ## apply package repository and then install the package
 
 .PHONY: unapplyp
 unapplyp: ## delete package and package repository
-	tanzu package installed delete multi-purpose-convention-server -n tap-install --yes
+	tanzu package installed delete PACKAGE_SHORT_NAME_PLACEHOLDER -n tap-install --yes
 	tanzu package repository delete PACKAGE_SHORT_NAME_PLACEHOLDER-repository -n tap-install --yes
 
 .PHONY: package

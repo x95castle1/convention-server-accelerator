@@ -116,12 +116,12 @@ stashPop:
 
 .PHONY: updateTemplateImage
 updateTemplateImage:
-	$(eval IMAGE_URL="https://registry.harbor.learn.tapsme.org/api/v2.0/projects/convention-service/repositories/multi-purpose-convention/artifacts/$(LATEST_TAG)?page=1&page_size=10&with_tag=false&with_label=false&with_scan_overview=false&with_accessory=false&with_signature=false&with_immutable_status=false")
+	$(eval IMAGE_URL="CONVENTION_IMAGE_REGISTRY_PLACEHOLDER_URL")
 	echo $(IMAGE_URL)
-	$(eval LATEST_DIGEST=$(shell curl -X GET $(IMAGE_URL) -H 'accept: application/json' | jq -r .digest))
+	$(eval LATEST_DIGEST=$(shell docker inspect $(IMAGE_URL) | jq -r '.[0].RepoDigests[0]'))
 	echo $(LATEST_DIGEST)
-	gsed -i "s/.*multi-purpose-convention@sha.*/          image: CONVENTION_IMAGE_REGISTRY_PLACEHOLDER_ESCAPED_URL@${LATEST_DIGEST}/g" ./carvel/config/deployment.yaml
-	gsed -i "s/.*multi-purpose-convention@sha.*/        image: CONVENTION_IMAGE_REGISTRY_PLACEHOLDER_ESCAPED_URL@${LATEST_DIGEST}/g" ./install-server/server-it.yaml
+	gsed -i "s/.*multi-purpose-convention@sha.*/          image: ${LATEST_DIGEST}/g" ./carvel/config/deployment.yaml
+	gsed -i "s/.*multi-purpose-convention@sha.*/        image: ${LATEST_DIGEST}/g" ./install-server/server-it.yaml
 
 .PHONY: updateGoDeps
 updateGoDeps:

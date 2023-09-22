@@ -6,13 +6,12 @@ metadata:
     apps.tanzu.vmware.com/workload-type: web
     apps.tanzu.vmware.com/language: golang
   name: convention-workload-probes
-  namespace: jeremy
 spec:
   params:
   - name: annotations
     value:
       autoscaling.knative.dev/minScale: "1"
-      example.com/readinessProbe: '{"httpGet":{"path":"/healthz","port":8080},"initialDelaySeconds":5,"periodSeconds":5}'
+      CONVENTION_PREFIX_PLACEHOLDER/readinessProbe: '{"httpGet":{"path":"/healthz","port":8080},"initialDelaySeconds":5,"periodSeconds":5}'
   source:
     git:
       ref:

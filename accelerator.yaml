@@ -12,6 +12,29 @@ accelerator:
       display: true
       defaultValue: convention-server.tap.example.com
       required: true
+    - name: conventionPrefix
+      label: "Convention Prefix"
+      display: true
+      defaultValue: example.com
+      required: true
+    - name: packageLongDescription
+      label: "Package Long Description"
+      description: "Longer description used to describe the package, read when viewing installed packages on a cluster"
+      display: true
+      defaultValue: Set of conventions that enriches the pod spec with awesome things
+      required: true
+    - name: packageShortDescription
+      label: "Package Short Description"
+      description: "Brief description of the convention server"
+      display: true
+      defaultValue: Conventions to enrich pod spec
+      required: true
+    - name: packageMaintainer
+      label: "Package Maintainers"
+      description: "Contacts for this convention server"
+      display: true
+      defaultValue: conventions@example.com
+      required: true
     - name: conventionImageRegistry
       label: "Convention Server Image Registry Path"
       description: "Full registry url where this convention server will be released"
@@ -62,3 +85,27 @@ engine:
           substitutions:
             - text: PACKAGE_SHORT_NAME_PLACEHOLDER
               with: "#packageName.substring(0, #packageName.indexOf('.'))"
+        - type: ReplaceText
+          substitutions:
+            - text: PACKAGE_SHORT_NAME_PLACEHOLDER
+              with: "#packageName.substring(0, #packageName.indexOf('.'))"
+        - type: ReplaceText
+          substitutions:
+            - text: PACKAGE_SUFFIX_PLACEHOLDER
+              with: "#packageName.substring(#packageName.indexOf('.') + 1)"
+        - type: ReplaceText
+          substitutions:
+            - text: PACKAGE_LONG_DESCRIPTION_PLACEHOLDER
+              with: "#packageLongDescription"
+        - type: ReplaceText
+          substitutions:
+            - text: PACKAGE_SHORT_DESCRIPTION_PLACEHOLDER
+              with: "#packageShortDescription"
+        - type: ReplaceText
+          substitutions:
+            - text: PACKAGE_MAINTAINERS_PLACEHOLDER
+              with: "#packageMaintainer"
+        - type: ReplaceText
+          substitutions:
+            - text: CONVENTION_PREFIX_PLACEHOLDER
+              with: "#conventionPrefix"

@@ -210,7 +210,7 @@ your own container image registry before installing.
     $ tanzu package available list --namespace tap-install
     / Retrieving available packages...
       NAME                                                              DISPLAY-NAME                       SHORT-DESCRIPTION
-      multi-purpose-convention-server.conventions.tanzu.vmware.com      multi-purpose-convention-server    Set of conventions to enrich pod spec with volumes, probes, affinities
+      PACKAGE_NAME_PLACEHOLDER      multi-purpose-convention-server    Set of conventions to enrich pod spec with volumes, probes, affinities
     ```
 
 ### Prepare Convention Configuration
@@ -247,7 +247,7 @@ tanzu package install REFERENCE-NAME \
 Where:
 
 - REFERENCE-NAME is the name referenced by the installed package. For example, multi-purpose-convention-server.
-- PACKAGE-NAME is the name of the convention package you retrieved earlier. For example, multi-purpose-convention-server.conventions.tanzu.vmware.com.
+- PACKAGE-NAME is the name of the convention package you retrieved earlier. For example, PACKAGE_NAME_PLACEHOLDER.
 - VERSION is your package version number. For example, 0.4.0
 - PATH-TO-VALUES-YAML is the path that points to the values.yaml file created earlier.
 
@@ -255,7 +255,7 @@ For example:
 
 ```console
 tanzu package install multi-purpose-convention-server  \
---package multi-purpose-convention-server.conventions.tanzu.vmware.com \
+--package PACKAGE_NAME_PLACEHOLDER \
 --version 0.4.0 \
 --namespace tap-install
 ```

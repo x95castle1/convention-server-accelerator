@@ -2,9 +2,9 @@ apiVersion: data.packaging.carvel.dev/v1alpha1
 kind: Package
 metadata:
   creationTimestamp: null
-  name: multi-purpose-convention-server.conventions.tanzu.vmware.com.0.0.0
+  name: PACKAGE_NAME_PLACEHOLDER.0.0.0
 spec:
-  refName: multi-purpose-convention-server.conventions.tanzu.vmware.com
+  refName: PACKAGE_NAME_PLACEHOLDER
   releasedAt: null
   template:
     spec:
@@ -26,15 +26,15 @@ apiVersion: data.packaging.carvel.dev/v1alpha1
 kind: PackageMetadata
 metadata:
   creationTimestamp: null
-  name: multi-purpose-convention-server.conventions.tanzu.vmware.com
+  name: PACKAGE_NAME_PLACEHOLDER
 spec:
   displayName: multi-purpose-convention-server
-  longDescription: Set of conventions to enrich pod spec with volumes, probes, affinities
+  longDescription: PACKAGE_LONG_DESCRIPTION_PLACEHOLDER
   maintainers:
-  - name: Tanzu
-  providerName: VMware
-  shortDescription: Conventions to enrich pod spec
-  supportDescription: https://tanzu.vmware.com/support
+  - name: PACKAGE_MAINTAINERS_PLACEHOLDER
+  providerName: PACKAGE_MAINTAINERS_PLACEHOLDER
+  shortDescription: PACKAGE_SHORT_DESCRIPTION_PLACEHOLDER
+  supportDescription: PACKAGE_MAINTAINERS_PLACEHOLDER
 
 ---
 apiVersion: packaging.carvel.dev/v1alpha1
@@ -46,7 +46,7 @@ metadata:
   name: multi-purpose-convention-server
 spec:
   packageRef:
-    refName: multi-purpose-convention-server.conventions.tanzu.vmware.com
+    refName: PACKAGE_NAME_PLACEHOLDER
     versionSelection:
       constraints: 0.0.0
   serviceAccountName: multi-purpose-convention-server-sa

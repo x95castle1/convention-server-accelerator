@@ -66,12 +66,12 @@ unapplyw: ## delete example workloads
 
 .PHONY: applyp
 applyp: ## apply package repository and then install the package
-	tanzu package repository add multi-purpose-conventions-repository \
-	--url projects.registry.vmware.com/tanzu_practice/conventions/multi-purpose-convention-server-bundle-repo:$(LATEST_TAG) \
+	tanzu package repository add PACKAGE_SHORT_NAME_PLACEHOLDER-repository \
+	--url RELEASE_PACKAGE_IMAGE_REGISTRY_PLACEHOLDER_URL/multi-purpose-convention-server-bundle-repo:$(LATEST_TAG) \
 	--namespace tap-install \
 	--yes
 	tanzu package install multi-purpose-convention-server  \
-  	--package multi-purpose-convention-server.conventions.tanzu.vmware.com \
+  	--package PACKAGE_NAME_PLACEHOLDER \
   	--values-file ./examples/package/values.yaml \
   	--version $(LATEST_TAG) \
   	--namespace tap-install \
@@ -80,7 +80,7 @@ applyp: ## apply package repository and then install the package
 .PHONY: unapplyp
 unapplyp: ## delete package and package repository
 	tanzu package installed delete multi-purpose-convention-server -n tap-install --yes
-	tanzu package repository delete multi-purpose-conventions-repository -n tap-install --yes
+	tanzu package repository delete PACKAGE_SHORT_NAME_PLACEHOLDER-repository -n tap-install --yes
 
 .PHONY: package
 package:

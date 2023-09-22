@@ -54,3 +54,11 @@ engine:
           substitutions:
             - text: RELEASE_PACKAGE_IMAGE_REGISTRY_PLACEHOLDER_URL
               with: "#releasePackageImageRegistry"
+        - type: ReplaceText
+          substitutions:
+            - text: PACKAGE_NAME_PLACEHOLDER
+              with: "#packageName.toLowerCase()"
+        - type: ReplaceText
+          substitutions:
+            - text: PACKAGE_SHORT_NAME_PLACEHOLDER
+              with: "#packageName.substringBefore('.')"

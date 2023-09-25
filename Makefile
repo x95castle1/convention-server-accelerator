@@ -6,7 +6,7 @@ GOBIN=$(shell go env GOBIN)
 endif
 
 GOIMPORTS ?= go run -modfile hack/go.mod golang.org/x/tools/cmd/goimports
-DOCKER_ORG ?= CONVENTION_IMAGE_REGISTRY_PLACEHOLDER_URL
+CONVENTION_IMAGE_LOCATION ?= CONVENTION_IMAGE_REGISTRY_PLACEHOLDER_URL
 STAGING_IMAGE_LOCATION ?= STAGING_PACKAGE_IMAGE_REGISTRY_PLACEHOLDER_URL
 RELEASE_IMAGE_LOCATION ?= RELEASE_PACKAGE_IMAGE_REGISTRY_PLACEHOLDER_URL
 INSTALL_NAMESPACE ?= multi-purpose-convention
@@ -42,7 +42,7 @@ vet: ## Run go vet against code
 
 .PHONY: image
 image:
-	pack build --publish $(DOCKER_ORG):$(LATEST_TAG)
+	pack build --publish $(CONVENTION_IMAGE_LOCATION):$(LATEST_TAG)
 
 .PHONY: install
 install: test ## Install conventions server

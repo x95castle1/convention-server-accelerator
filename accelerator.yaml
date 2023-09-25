@@ -119,3 +119,18 @@ engine:
           substitutions:
             - text: CONVENTION_PREFIX_PLACEHOLDER
               with: "#conventionPrefix"
+        - type: ReplaceText
+          substitutions:
+            - text: STAGING_REGISTRY_HOST
+              with: "#stagingPackageImageRegistry.substring(0, #stagingPackageImageRegistry.indexOf('/'))"
+        - type: ReplaceText
+          substitutions:
+            - text: RELEASE_REGISTRY_HOST
+              with: "#releasePackageImageRegistry.substring(0, #releasePackageImageRegistry.indexOf('/'))"
+        - type: ReplaceText
+          substitutions:
+            - text: CONVENTION_IMAGE_REGISTRY_HOST
+              with: "#conventionImageRegistry.substring(0, #conventionImageRegistry.indexOf('/'))"
+
+
+              

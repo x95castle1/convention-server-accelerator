@@ -46,13 +46,34 @@ brew install jq
 brew install gsed
 ```
 
-Logged into staging registry
+Logged into Staging Package Registry
 ```shell
-
+docker login STAGING_REGISTRY_HOST
 ```
-Logged into production registry
-```shell
 
+Logged into Production Package Registry
+```shell
+docker login RELEASE_REGISTRY_HOST
+```
+
+Logged into Convention Image Registry
+```shell
+docker login CONVENTION_IMAGE_REGISTRY_HOST
+```
+
+Convention Source code is in a git repo.
+```shell
+git init
+git add .
+git commit -m "Initial Commit"
+git branch -M main
+> git remote add origin https://github.com/<my-repo>.git
+git push -u origin main
+```
+
+Initial TAG is set on:
+```shell
+git tag 0.0.0
 ```
 
 ## Available Options

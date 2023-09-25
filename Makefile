@@ -114,12 +114,19 @@ stash:
 stashPop:
 	git stash pop || true 
 
-.PHONY: updateTemplateImage
-updateTemplateImage:
+.PHONY: getLatestDigest
+getLatestDigest:
 	$(eval IMAGE_URL="CONVENTION_IMAGE_REGISTRY_PLACEHOLDER_URL:$(LATEST_TAG)")
 	echo $(IMAGE_URL)
-	docker pull $(IMAGE_URL)
-	$(eval LATEST_DIGEST=$(shell docker inspect $(IMAGE_URL) | jq -r '.[0].RepoDigests[0]'))
+	docker pull $(IMAGE_URL) || true
+	echo "obtaining digest"
+	mkdir -p tmp
+	docker inspect $(IMAGE_URL) > tmp/image_inspect.json
+	jq -r '.[0].RepoDigests[0]' tmp/image_inspect.json > tmp/latest_digest.json
+
+.PHONY: updateTemplateImage
+updateTemplateImage:
+	$(eval LATEST_DIGEST=$(shell cat tmp/latest_digest.json))
 	echo $(LATEST_DIGEST)
 	gsed -i "s|.*multi-purpose-convention@sha.*|          image: ${LATEST_DIGEST}|" ./carvel/config/deployment.yaml
 	gsed -i "s|.*multi-purpose-convention@sha.*|        image: ${LATEST_DIGEST}|" ./install-server/server-it.yaml
@@ -135,10 +142,13 @@ commitGoDeps:
 	git commit -m "bump go deps: $(NEXT_TAG)" || true
 	git push
 
+.PHONY: sleep
+sleep:
+	sleep 3
 
 # future, clone main and perform release on that vs stash/unstash
 .PHONY: release
-release: stash updateGoDeps commitGoDeps build tag updateLatestTagVariable image updateTemplateImage package commitReleasedFiles promote stashPop ## perform a release
+release: stash updateGoDeps commitGoDeps build tag updateLatestTagVariable image sleep getLatestDigest updateTemplateImage package commitReleasedFiles promote stashPop ## perform a release
 
 # Absolutely awesome: http://marmelab.com/blog/2016/02/29/auto-documented-makefile.html
 help: ## Print help for each make target

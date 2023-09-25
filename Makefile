@@ -67,7 +67,7 @@ unapplyw: ## delete example workloads
 .PHONY: applyp
 applyp: ## apply package repository and then install the package
 	tanzu package repository add PACKAGE_SHORT_NAME_PLACEHOLDER-repository \
-	--url RELEASE_PACKAGE_IMAGE_REGISTRY_PLACEHOLDER_URL/multi-purpose-convention-server-bundle-repo:$(LATEST_TAG) \
+	--url RELEASE_PACKAGE_IMAGE_REGISTRY_PLACEHOLDER_URL:$(LATEST_TAG) \
 	--namespace tap-install \
 	--yes
 	tanzu package install PACKAGE_SHORT_NAME_PLACEHOLDER \

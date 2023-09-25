@@ -121,8 +121,8 @@ updateTemplateImage:
 	docker pull $(IMAGE_URL)
 	$(eval LATEST_DIGEST=$(shell docker inspect $(IMAGE_URL) | jq -r '.[0].RepoDigests[0]'))
 	echo $(LATEST_DIGEST)
-	gsed -i "s/.*multi-purpose-convention@sha.*/          image: ${LATEST_DIGEST}/g" ./carvel/config/deployment.yaml
-	gsed -i "s/.*multi-purpose-convention@sha.*/        image: ${LATEST_DIGEST}/g" ./install-server/server-it.yaml
+	gsed -i "s|.*multi-purpose-convention@sha.*|          image: ${LATEST_DIGEST}|" ./carvel/config/deployment.yaml
+	gsed -i "s|.*multi-purpose-convention@sha.*|        image: ${LATEST_DIGEST}|" ./install-server/server-it.yaml
 
 .PHONY: updateGoDeps
 updateGoDeps:

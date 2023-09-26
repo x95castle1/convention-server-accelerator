@@ -21,11 +21,11 @@ This contains the logic for your conventions. Each convention is part of variabl
 
 ## Pre-Requisites
 
-* [Golang 1.20+](https://go.dev/doc/install)
+* [Golang 1.20+](https://go.dev/doc/install) - Convention Server is written in Golang.
 ```shell
 brew install go
 ```
-* [Pack CLI](https://buildpacks.io/docs/tools/pack/)
+* [Pack CLI](https://buildpacks.io/docs/tools/pack/) - Used to build image using Cloud Native Buildpacks.
 ```shell
 brew install buildpacks/tap/pack
 ```
@@ -33,35 +33,42 @@ brew install buildpacks/tap/pack
 ```shell
 pack config default-builder paketobuildpacks/builder-jammy-tiny
 ```
-* [Tanzu CLI](https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.6/tap/install-tanzu-cli.html)
+* [Tanzu CLI](https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.6/tap/install-tanzu-cli.html) - Used to install repository and packages on TAP cluster.
+```
+brew install vmware-tanzu/tanzu/tanzu-cli
+tanzu plugin install --group vmware-tap/default:v1.6.3
+```
 
 * [Kctrl CLI](https://github.com/carvel-dev/carvel) - Needed for bundling and releasing as a Carvel Package
+```shell
+brew install vmware-tanzu/carvel
+```
 
-* [jq](https://jqlang.github.io/jq/)
+* [jq](https://jqlang.github.io/jq/) - Utilized in build automation in the `Makefile`
 ```shell
 brew install jq
 ```
-* [gsed](https://formulae.brew.sh/formula/gnu-sed)
+* [gsed](https://formulae.brew.sh/formula/gnu-sed) - Utilized in build automation in the `Makefile`
 ```shell
 brew install gsed
 ```
 
-Logged into Staging Package Registry
+Logged into Staging Package Registry - Location to stage packaging.
 ```shell
 docker login STAGING_REGISTRY_HOST
 ```
 
-Logged into Production Package Registry
+Logged into Production Package Registry - Location to release packaging.
 ```shell
 docker login RELEASE_REGISTRY_HOST
 ```
 
-Logged into Convention Image Registry
+Logged into Convention Image Registry - Location of built image.
 ```shell
 docker login CONVENTION_IMAGE_REGISTRY_HOST
 ```
 
-Convention Source code is in a git repo.
+Convention Source code is in a git repo - Needed for build automation in `Makefile`
 ```shell
 git init
 git add .
@@ -71,7 +78,7 @@ git branch -M main
 git push -u origin main
 ```
 
-Initial TAG is set on:
+Initial TAG is set - Needed for build autmation in `Makefile`
 ```shell
 git tag 0.0.0
 ```
@@ -80,7 +87,7 @@ git tag 0.0.0
 
 | Annotation | Description | 
 | --- | --- |
-| `example.com/readinessProbe` | define a readiness probe |
+| `CONVENTION_PREFIX_PLACEHOLDER/readinessProbe` | define a readiness probe |
 
 ## Example Annotations for a Workload
 
@@ -89,7 +96,7 @@ spec:
   params:
   - name: annotations
     value:
-      example.com/readinessProbe: '{"httpGet":{"path":"/healthz","port":8080},"initialDelaySeconds":5,"periodSeconds":5}'
+      CONVENTION_PREFIX_PLACEHOLDER/readinessProbe: '{"httpGet":{"path":"/healthz","port":8080},"initialDelaySeconds":5,"periodSeconds":5}'
 
 ```
 
@@ -115,7 +122,7 @@ spec:
   params:
   - name: annotations
     value:
-      example.com/readinessProbe: '{"httpGet":{"path":"/healthz","port":8080},"initialDelaySeconds":5,"periodSeconds":5}'
+      CONVENTION_PREFIX_PLACEHOLDER/readinessProbe: '{"httpGet":{"path":"/healthz","port":8080},"initialDelaySeconds":5,"periodSeconds":5}'
   source:
     git:
       ref:
@@ -200,7 +207,7 @@ your own container image registry before installing.
 3. Add multi-purpose-convention-server package repository to the cluster by running:
 
     ```shell
-    tanzu package repository add multi-purpose-conventions-repository \
+    tanzu package repository add multi-purpose-convention-repository \
       --url ${INSTALL_REGISTRY_HOSTNAME}/${INSTALL_REPO}/multi-purpose-convention-server-bundle-repo:$VERSION \
       --namespace tap-install
     ```
@@ -209,16 +216,16 @@ your own container image registry before installing.
 
 
     ```shell
-    tanzu package repository get multi-purpose-conventions-repository --namespace tap-install
+    tanzu package repository get multi-purpose-convention-repository --namespace tap-install
     ```
 
     For example:
 
     ```console
-    tanzu package repository get multi-purpose-conventions-repository --namespace tap-install
+    tanzu package repository get multi-purpose-convention-repository --namespace tap-install
 
     NAMESPACE:               tap-install
-    NAME:                    multi-purpose-conventions-repository
+    NAME:                    multi-purpose-convention-repository
     SOURCE:                  (imgpkg) projects.registry.vmware.com/tanzu_practice/conventions/multi-purpose-convention-server-bundle-repo:0.4.0
     STATUS:                  Reconcile succeeded
     CONDITIONS:              - type: ReconcileSucceeded
@@ -240,7 +247,7 @@ your own container image registry before installing.
     $ tanzu package available list --namespace tap-install
     / Retrieving available packages...
       NAME                                                              DISPLAY-NAME                       SHORT-DESCRIPTION
-      PACKAGE_NAME_PLACEHOLDER      multi-purpose-convention-server    Set of conventions to enrich pod spec with volumes, probes, affinities
+      PACKAGE_NAME_PLACEHOLDER      multi-purpose-convention-server    PACKAGE_SHORT_DESCRIPTION_PLACEHOLDER
     ```
 
 ### Prepare Convention Configuration

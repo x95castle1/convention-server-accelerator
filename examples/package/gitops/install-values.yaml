@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: ARTIFACT_ID_PLACEHOLDER-install-values
+  namespace: tap-install
+stringData:
+  values.yaml: |
+    annotationPrefix: CONVENTION_PREFIX_PLACEHOLDER

@@ -268,6 +268,10 @@ tanzu package install ARTIFACT_ID_PLACEHOLDER  \
 --namespace tap-install
 ```
 
+### Gitops Package Install
+
+see examples/package/gitops for PackageRepository, PackageInstall and a Secret to hold the data values
+
 ## Setup Development Environment
 
 This project has `Makefile` to `make` life easier for you. 

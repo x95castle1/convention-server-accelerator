@@ -19,11 +19,13 @@ accelerator:
       display: true
       defaultValue: convention-server.tap.example.com
       required: true
+      description: "Name the Carvel package will be given, this is used when installing a package"
     - name: conventionPrefix
       label: "Convention Prefix"
       display: true
       defaultValue: example.com
       required: true
+      description: "Annotation prefix to be used in a workload to pass data to your convention server"
     - name: packageLongDescription
       label: "Package Long Description"
       description: "Longer description used to describe the package, read when viewing installed packages on a cluster"

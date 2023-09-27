@@ -23,18 +23,15 @@ var Conventions = []convention.Convention{
 		},
 		Apply: func(ctx context.Context, target *corev1.PodTemplateSpec, containerIdx int, metadata convention.ImageMetadata, imageName string) error {
 			readinessProbe := getAnnotation(target, ReadinessAnnotation)
+			c := &target.Spec.Containers[containerIdx]
 
-			for i := range target.Spec.Containers {
-				c := &target.Spec.Containers[i]
-
-				if c.ReadinessProbe == nil {
-					p, err := getProbe(readinessProbe)
-					if err != nil {
-						return err
-					}
-					log.Printf("Adding ReadinessProbe %+v", p)
-					c.ReadinessProbe = p
+			if c.ReadinessProbe == nil {
+				p, err := getProbe(readinessProbe)
+				if err != nil {
+					return err
 				}
+				log.Printf("Adding ReadinessProbe %+v", p)
+				c.ReadinessProbe = p
 			}
 			return nil
 		},

@@ -14,4 +14,3 @@ spec:
       image: RELEASE_PACKAGE_IMAGE_REGISTRY_PLACEHOLDER_URL:0.1.0
       secretRef:
         name: tap-registry
-        namespace: tap-install

@@ -7,6 +7,13 @@ accelerator:
     - convention
     - supplychain
   options:
+    - name: projectName
+      label: "Name"
+      display: true
+      defaultValue: example-server
+      required: true
+      validationRegex: "^[a-zA-Z][a-zA-Z0-9-]{0,20}$"
+      description: "Name needs to start with a letter and be less than 22 characters in length"
     - name: packageName
       label: "Package Name"
       display: true

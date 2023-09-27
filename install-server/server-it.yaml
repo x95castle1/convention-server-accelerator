@@ -2,56 +2,56 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: multi-purpose-convention
+  name: ARTIFACT_ID_PLACEHOLDER
 
 ---
 apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata:
-  name: multi-purpose-convention-selfsigned-issuer
-  namespace: multi-purpose-convention
+  name: ARTIFACT_ID_PLACEHOLDER-selfsigned-issuer
+  namespace: ARTIFACT_ID_PLACEHOLDER
 spec:
   selfSigned: {}
 ---
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: multi-purpose-convention-webhook-cert
-  namespace: multi-purpose-convention
+  name: ARTIFACT_ID_PLACEHOLDER-webhook-cert
+  namespace: ARTIFACT_ID_PLACEHOLDER
 spec:
   subject:
     organizations:
     - vmware
     organizationalUnits:
     - tanzu
-  commonName: multi-purpose-convention-webhook.multi-purpose-convention.svc
+  commonName: ARTIFACT_ID_PLACEHOLDER-webhook.ARTIFACT_ID_PLACEHOLDER.svc
   dnsNames:
-  - multi-purpose-convention-webhook.multi-purpose-convention.svc
-  - multi-purpose-convention-webhook.multi-purpose-convention.svc.cluster.local
+  - ARTIFACT_ID_PLACEHOLDER-webhook.ARTIFACT_ID_PLACEHOLDER.svc
+  - ARTIFACT_ID_PLACEHOLDER-webhook.ARTIFACT_ID_PLACEHOLDER.svc.cluster.local
   issuerRef:
     kind: Issuer
-    name: multi-purpose-convention-selfsigned-issuer
-  secretName: multi-purpose-convention-webhook-cert
+    name: ARTIFACT_ID_PLACEHOLDER-selfsigned-issuer
+  secretName: ARTIFACT_ID_PLACEHOLDER-webhook-cert
   revisionHistoryLimit: 10
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: multi-purpose-convention-webhook
-  namespace: multi-purpose-convention
+  name: ARTIFACT_ID_PLACEHOLDER-webhook
+  namespace: ARTIFACT_ID_PLACEHOLDER
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: multi-purpose-convention-webhook
+      app: ARTIFACT_ID_PLACEHOLDER-webhook
   template:
     metadata:
       labels:
-        app: multi-purpose-convention-webhook
+        app: ARTIFACT_ID_PLACEHOLDER-webhook
     spec:
       containers:
       - name: webhook
-        image: multi-purpose-convention@sha
+        image: ARTIFACT_ID_PLACEHOLDER@sha
         imagePullPolicy: Always
         env:
         - name: PORT
@@ -86,16 +86,16 @@ spec:
         - name: certs
           secret:
             defaultMode: 420
-            secretName: multi-purpose-convention-webhook-cert
+            secretName: ARTIFACT_ID_PLACEHOLDER-webhook-cert
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: multi-purpose-convention-webhook
-  namespace: multi-purpose-convention
+  name: ARTIFACT_ID_PLACEHOLDER-webhook
+  namespace: ARTIFACT_ID_PLACEHOLDER
 spec:
   selector:
-    app: multi-purpose-convention-webhook
+    app: ARTIFACT_ID_PLACEHOLDER-webhook
   ports:
     - protocol: TCP
       port: 443
@@ -104,13 +104,13 @@ spec:
 apiVersion: conventions.carto.run/v1alpha1
 kind: ClusterPodConvention
 metadata:
-  name: multi-purpose-convention
+  name: ARTIFACT_ID_PLACEHOLDER
 spec:
   webhook:
     certificate:
-      namespace: multi-purpose-convention
-      name: multi-purpose-convention-webhook-cert
+      namespace: ARTIFACT_ID_PLACEHOLDER
+      name: ARTIFACT_ID_PLACEHOLDER-webhook-cert
     clientConfig:
       service:
-        name: multi-purpose-convention-webhook
-        namespace: multi-purpose-convention
+        name: ARTIFACT_ID_PLACEHOLDER-webhook
+        namespace: ARTIFACT_ID_PLACEHOLDER

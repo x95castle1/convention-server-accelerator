@@ -28,7 +28,7 @@ spec:
             runAsUser: 1000
           #@ end
             allowPrivilegeEscalation: false
-          image: multi-purpose-convention@sha
+          image: ARTIFACT_ID_PLACEHOLDER@sha
           imagePullPolicy: Always
           env:
             - name: PORT

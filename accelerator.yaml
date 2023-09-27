@@ -78,11 +78,7 @@ engine:
       chain:
         - type: ReplaceText
           substitutions:
-            - text: multi-purpose-convention-server
-              with: "#artifactId.toLowerCase()" 
-        - type: ReplaceText
-          substitutions:
-            - text: multi-purpose-convention
+            - text: ARTIFACT_ID_PLACEHOLDER
               with: "#artifactId.toLowerCase()"
         - type: ReplaceText
           substitutions:

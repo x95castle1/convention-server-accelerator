@@ -1,10 +1,10 @@
 #@data/values-schema
 ---
 #@schema/desc "Name for the convention server"
-name: multi-purpose-convention
+name: ARTIFACT_ID_PLACEHOLDER
 
 #@schema/desc "Deployment namespace for the convention server"
-namespace: multi-purpose-convention
+namespace: ARTIFACT_ID_PLACEHOLDER
 
 #@schema/desc "Annotation prefix"
 annotationPrefix: example.com

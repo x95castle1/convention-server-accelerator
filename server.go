@@ -11,7 +11,7 @@ import (
 
 	"github.com/x95castle1/convention-server-framework/pkg/handler"
 
-	"multi-purpose-convention-server/pkg/conventions"
+	"ARTIFACT_ID_PLACEHOLDER/pkg/conventions"
 
 	"github.com/go-logr/logr"
 	"github.com/go-logr/zapr"
@@ -21,7 +21,7 @@ import (
 
 const (
 	logComponentKey  = "component"
-	logComponentName = "multi-purpose-convention"
+	logComponentName = "ARTIFACT_ID_PLACEHOLDER"
 )
 
 func main() {

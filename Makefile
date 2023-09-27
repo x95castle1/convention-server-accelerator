@@ -9,8 +9,8 @@ GOIMPORTS ?= go run -modfile hack/go.mod golang.org/x/tools/cmd/goimports
 CONVENTION_IMAGE_LOCATION ?= CONVENTION_IMAGE_REGISTRY_PLACEHOLDER_URL
 STAGING_IMAGE_LOCATION ?= STAGING_PACKAGE_IMAGE_REGISTRY_PLACEHOLDER_URL
 RELEASE_IMAGE_LOCATION ?= RELEASE_PACKAGE_IMAGE_REGISTRY_PLACEHOLDER_URL
-INSTALL_NAMESPACE ?= multi-purpose-convention
-CONVENTION_NAME ?= multi-purpose-convention
+INSTALL_NAMESPACE ?= ARTIFACT_ID_PLACEHOLDER
+CONVENTION_NAME ?= ARTIFACT_ID_PLACEHOLDER
 
 # TAG LOGIC
 LATEST_TAG := $(shell git tag | sort -r --version-sort | head -n1)
@@ -34,7 +34,7 @@ test: fmt vet ## Run tests
 
 .PHONY: fmt
 fmt: ## Run go fmt against code
-	$(GOIMPORTS) --local multi-purpose-convention-server -w .
+	$(GOIMPORTS) --local ARTIFACT_ID_PLACEHOLDER -w .
 
 .PHONY: vet
 vet: ## Run go vet against code
@@ -128,8 +128,8 @@ getLatestDigest:
 updateTemplateImage:
 	$(eval LATEST_DIGEST=$(shell cat tmp/latest_digest.json))
 	echo $(LATEST_DIGEST)
-	gsed -i "s|.*multi-purpose-convention@sha.*|          image: ${LATEST_DIGEST}|" ./carvel/config/deployment.yaml
-	gsed -i "s|.*multi-purpose-convention@sha.*|        image: ${LATEST_DIGEST}|" ./install-server/server-it.yaml
+	gsed -i "s|.*ARTIFACT_ID_PLACEHOLDER@sha.*|          image: ${LATEST_DIGEST}|" ./carvel/config/deployment.yaml
+	gsed -i "s|.*ARTIFACT_ID_PLACEHOLDER@sha.*|        image: ${LATEST_DIGEST}|" ./install-server/server-it.yaml
 
 .PHONY: updateGoDeps
 updateGoDeps:

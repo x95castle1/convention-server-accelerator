@@ -28,7 +28,7 @@ metadata:
   creationTimestamp: null
   name: PACKAGE_NAME_PLACEHOLDER
 spec:
-  displayName: multi-purpose-convention-server
+  displayName: ARTIFACT_ID_PLACEHOLDER
   longDescription: PACKAGE_LONG_DESCRIPTION_PLACEHOLDER
   maintainers:
   - name: PACKAGE_MAINTAINERS_PLACEHOLDER
@@ -43,13 +43,13 @@ metadata:
   annotations:
     kctrl.carvel.dev/local-fetch-0: .
   creationTimestamp: null
-  name: multi-purpose-convention-server
+  name: ARTIFACT_ID_PLACEHOLDER
 spec:
   packageRef:
     refName: PACKAGE_NAME_PLACEHOLDER
     versionSelection:
       constraints: 0.0.0
-  serviceAccountName: multi-purpose-convention-server-sa
+  serviceAccountName: ARTIFACT_ID_PLACEHOLDER-sa
 status:
   conditions: null
   friendlyDescription: ""

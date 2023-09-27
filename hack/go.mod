@@ -1,4 +1,4 @@
-module multi-purpose-convention-server/tools
+module ARTIFACT_ID_PLACEHOLDER/tools
 
 go 1.18
 

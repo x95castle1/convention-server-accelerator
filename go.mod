@@ -1,4 +1,4 @@
-module multi-purpose-convention-server
+module ARTIFACT_ID_PLACEHOLDER
 
 go 1.20
 

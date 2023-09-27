@@ -1,4 +1,4 @@
-# multi-purpose-convention-server
+# ARTIFACT_ID_PLACEHOLDER
 
 
 ## Component Overview
@@ -152,20 +152,20 @@ spec:
 
 ## Install on a Cluster
 
-The multi-purpose-convention-server has been conveniently packaged up via Carvel and can be installed on a TAP cluster via the Tanzu CLI.
+The ARTIFACT_ID_PLACEHOLDER has been conveniently packaged up via Carvel and can be installed on a TAP cluster via the Tanzu CLI.
 
-### Install via Carvel Package
+### Install Carvel Package Repository
 
 Run the following command to output a list of available tags.
 
   ```shell
-  imgpkg tag list -i projects.registry.vmware.com/tanzu_practice/conventions/multi-purpose-convention-server-bundle-repo | sort -V
+  imgpkg tag list -i RELEASE_PACKAGE_IMAGE_REGISTRY_PLACEHOLDER_URL | sort -V
   ```
 
   For example:
 
   ```shell
-  imgpkg tag list -i projects.registry.vmware.com/tanzu_practice/conventions/multi-purpose-convention-server-bundle-repo | sort -V
+  imgpkg tag list -i RELEASE_PACKAGE_IMAGE_REGISTRY_PLACEHOLDER_URL | sort -V
 
   0.1.0
   0.2.0
@@ -175,58 +175,28 @@ Run the following command to output a list of available tags.
 
 Use the latest version returned by the command above.
 
-We recommend to relocate the images from VMware Tanzu Network registry to
-your own container image registry before installing.
-
-1. Set up environment variables for installation by running:
+1. Add ARTIFACT_ID_PLACEHOLDER package repository to the cluster by running:
 
     ```shell
-    export INSTALL_REGISTRY_USERNAME=MY-REGISTRY-USER
-    export INSTALL_REGISTRY_PASSWORD=MY-REGISTRY-PASSWORD
-    export INSTALL_REGISTRY_HOSTNAME=MY-REGISTRY
-    export VERSION=VERSION-NUMBER
-    export INSTALL_REPO=TARGET-REPOSITORY
-    ```
-
-    Where:
-
-    - `MY-REGISTRY-USER` is the user with write access to MY-REGISTRY.
-    - `MY-REGISTRY-PASSWORD` is the password for `MY-REGISTRY-USER`.
-    - `MY-REGISTRY` is your own registry.
-    - `VERSION` is your multi-purpose-convention-server version. For example, `0.4.0`.
-    - `TARGET-REPOSITORY` is your target repository, a directory or repository on
-      `MY-REGISTRY` that serves as the location for the installation files for
-      the conventions.
-
-2. Relocate the images with the imgpkg CLI by running:
-
-    ```shell
-    imgpkg copy -b projects.registry.vmware.com/tanzu_practice/conventions/multi-purpose-convention-server-bundle-repo:${VERSION} --to-repo ${INSTALL_REGISTRY_HOSTNAME}/${INSTALL_REPO}/multi-purpose-convention-server-bundle-repo
-    ```
-
-3. Add multi-purpose-convention-server package repository to the cluster by running:
-
-    ```shell
-    tanzu package repository add multi-purpose-convention-repository \
-      --url ${INSTALL_REGISTRY_HOSTNAME}/${INSTALL_REPO}/multi-purpose-convention-server-bundle-repo:$VERSION \
+    tanzu package repository add ARTIFACT_ID_PLACEHOLDER-repository \
+      --url RELEASE_PACKAGE_IMAGE_REGISTRY_PLACEHOLDER_URL:$VERSION \
       --namespace tap-install
     ```
 
-4. Get the status of multi-purpose-convention-server  package repository, and ensure that the status updates to `Reconcile succeeded` by running:
-
+2. Get the status of ARTIFACT_ID_PLACEHOLDER package repository, and ensure that the status updates to `Reconcile succeeded` by running:
 
     ```shell
-    tanzu package repository get multi-purpose-convention-repository --namespace tap-install
+    tanzu package repository get ARTIFACT_ID_PLACEHOLDER-repository --namespace tap-install
     ```
 
     For example:
 
     ```console
-    tanzu package repository get multi-purpose-convention-repository --namespace tap-install
+    tanzu package repository get ARTIFACT_ID_PLACEHOLDER-repository --namespace tap-install
 
     NAMESPACE:               tap-install
-    NAME:                    multi-purpose-convention-repository
-    SOURCE:                  (imgpkg) projects.registry.vmware.com/tanzu_practice/conventions/multi-purpose-convention-server-bundle-repo:0.4.0
+    NAME:                    ARTIFACT_ID_PLACEHOLDER-repository
+    SOURCE:                  (imgpkg) RELEASE_PACKAGE_IMAGE_REGISTRY_PLACEHOLDER_URL:0.4.0
     STATUS:                  Reconcile succeeded
     CONDITIONS:              - type: ReconcileSucceeded
       status: "True"
@@ -235,7 +205,7 @@ your own container image registry before installing.
     USEFUL-ERROR-MESSAGE:
     ```
 
-5. List the available packages by running:
+3. List the available packages by running:
 
     ```shell
     tanzu package available list --namespace tap-install
@@ -247,7 +217,7 @@ your own container image registry before installing.
     $ tanzu package available list --namespace tap-install
     / Retrieving available packages...
       NAME                                                              DISPLAY-NAME                       SHORT-DESCRIPTION
-      PACKAGE_NAME_PLACEHOLDER      multi-purpose-convention-server    PACKAGE_SHORT_DESCRIPTION_PLACEHOLDER
+      PACKAGE_NAME_PLACEHOLDER      ARTIFACT_ID_PLACEHOLDER    PACKAGE_SHORT_DESCRIPTION_PLACEHOLDER
     ```
 
 ### Prepare Convention Configuration
@@ -267,9 +237,9 @@ by using the following configuration:
 
   - `ANNOTATION-PREFIX` is the prefix you want to use on your annotation used in the workload. Defaults to `example.com`.
 
-### Install multi-purpose-convention-server
+### Install ARTIFACT_ID_PLACEHOLDER
 
-Define the `--values-file` flag to customize the default configuration (Optional):
+Define the `--values-file` flag to customize the default configuration. See `./examples/package/values.yaml`
 
 The `values.yaml` file you created earlier is referenced with the `--values-file` flag when running your Tanzu install command:
 
@@ -283,7 +253,7 @@ tanzu package install REFERENCE-NAME \
 
 Where:
 
-- REFERENCE-NAME is the name referenced by the installed package. For example, multi-purpose-convention-server.
+- REFERENCE-NAME is the name referenced by the installed package. For example, ARTIFACT_ID_PLACEHOLDER.
 - PACKAGE-NAME is the name of the convention package you retrieved earlier. For example, PACKAGE_NAME_PLACEHOLDER.
 - VERSION is your package version number. For example, 0.4.0
 - PATH-TO-VALUES-YAML is the path that points to the values.yaml file created earlier.
@@ -291,9 +261,10 @@ Where:
 For example:
 
 ```console
-tanzu package install multi-purpose-convention-server  \
+tanzu package install ARTIFACT_ID_PLACEHOLDER  \
 --package PACKAGE_NAME_PLACEHOLDER \
 --version 0.4.0 \
+--values-file ./examples/package/values.yaml
 --namespace tap-install
 ```
 
@@ -304,10 +275,10 @@ This project has `Makefile` to `make` life easier for you.
 ### Variables
 
 * `CONVENTION_IMAGE_LOCATION` - The location to push the image built by the Makefile. Default: `CONVENTION_IMAGE_REGISTRY_PLACEHOLDER_URL`
-* `DEV_IMAGE_LOCATION` - The image registry to push the carvel bundle. This is a staging repo. Default: `harbor-repo.vmware.com/tanzu_practice/conventions/multi-purpose-convention-server-bundle-repo`
-* `PROMOTION_IMAGE_LOCATION` - The image registry to imgpkg copy to make the carvel bundle publically available. Default: `projects.registry.vmware.com/tanzu_practice/conventions/multi-purpose-convention-server-bundle-repo`
-* `INSTALL_NAMESPACE` - Namespace where the bundle is installed. Used to restart the pods. Default: `multi-purpose-convention`
-* `CONVENTION_NAME` - Name of the image repository project. Appended to CONVENTION_IMAGE_LOCATION variable. Default:  `multi-purpose-convention`
+* `DEV_IMAGE_LOCATION` - The image registry to push the carvel bundle. This is a staging repo. Default: `STAGING_PACKAGE_IMAGE_REGISTRY_PLACEHOLDER_URL`
+* `PROMOTION_IMAGE_LOCATION` - The image registry to imgpkg copy to make the carvel bundle publically available. Default: `RELEASE_PACKAGE_IMAGE_REGISTRY_PLACEHOLDER_URL`
+* `INSTALL_NAMESPACE` - Namespace where the bundle is installed. Used to restart the pods. Default: `ARTIFACT_ID_PLACEHOLDER`
+* `CONVENTION_NAME` - Name of the image repository project. Appended to CONVENTION_IMAGE_LOCATION variable. Default:  `ARTIFACT_ID_PLACEHOLDER`
 
 ```shell
 export CONVENTION_IMAGE_LOCATION=CONVENTION_IMAGE_REGISTRY_PLACEHOLDER_URL
@@ -333,7 +304,7 @@ make image
 
 ### make install
 
-This will deploy `install-server/server-it.yaml` onto the current cluster. This is useful for quick testing. This will create a new namespace `multi-purpose-convention` and configure cartographer conventions to use this convention provider along with self signed certs.
+This will deploy `install-server/server-it.yaml` onto the current cluster. This is useful for quick testing. This will create a new namespace `ARTIFACT_ID_PLACEHOLDER` and configure cartographer conventions to use this convention provider along with self signed certs.
 
 ```shell
 make install
@@ -373,7 +344,7 @@ make applyw
 
 ### make applyp
 
-This will add the package repository and package for multi-purpose-convention-server. This is useful when needing to install convention server via a package. 
+This will add the package repository and package for ARTIFACT_ID_PLACEHOLDER. This is useful when needing to install convention server via a package. 
 
 ```shell
 make applyp
@@ -381,7 +352,7 @@ make applyp
 
 ### make unapplyp
 
-This will delete the package repository and package for multi-purpose-convention-server. This is useful when tear down the convention server installed via a package. 
+This will delete the package repository and package for ARTIFACT_ID_PLACEHOLDER. This is useful when tear down the convention server installed via a package. 
 
 ```shell
 make unapplyp

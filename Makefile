@@ -151,9 +151,16 @@ sleep:
 applyacc:
 	tanzu acc create convention-server-template --git-repository $(GIT_URL) --interval 60s
 
+.PHONY: verifyDockerIsRunning
+verifyDockerIsRunning:
+	@if ! docker stats --no-stream &> /dev/null; then \
+		echo "Docker is not running. Please start docker before releasing."; \
+        exit 1; \
+    fi
+
 # future, clone main and perform release on that vs stash/unstash
 .PHONY: release
-release: stash updateGoDeps commitGoDeps build tag updateLatestTagVariable image sleep getLatestDigest updateTemplateImage package commitReleasedFiles promote stashPop ## perform a release
+release: verifyDockerIsRunning stash updateGoDeps commitGoDeps build tag updateLatestTagVariable image sleep getLatestDigest updateTemplateImage package commitReleasedFiles promote stashPop ## perform a release
 
 # Absolutely awesome: http://marmelab.com/blog/2016/02/29/auto-documented-makefile.html
 help: ## Print help for each make target

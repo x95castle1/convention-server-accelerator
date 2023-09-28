@@ -1,9 +1,16 @@
 # ARTIFACT_ID_PLACEHOLDER
 
+This README was generate from a TAP Accelerator. You can quickly test generated convention servers works by running the following commands to build and release the convention server as a package, apply the package, and then run a sample workload. You need to make sure you have all the prerequisites completed FIRST!!!.
+
+```
+make release
+make applyp
+make applyw
+```
 
 ## Component Overview
 
-A sample convention server....add a description here
+packageLongDescription
 
 ### server.go
 

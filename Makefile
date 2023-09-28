@@ -148,7 +148,7 @@ sleep:
 	sleep 3
 
 .PHONY: 
-applyacc:
+applyacc: ## install accelerator
 	tanzu acc create convention-server-template --git-repository $(GIT_URL) --interval 60s
 
 .PHONY: verifyDockerIsRunning
@@ -160,8 +160,12 @@ verifyDockerIsRunning:
 
 # this prunes the old packages from your Package repository. Keeps the last 5.
 .PHONY: pruneYourPackages
-pruneYourPackages:
+pruneYourPackages: ## prune package repository
 	./scripts/pruneYourPackages.sh
+
+.PHONY: setupDevEnv
+setupDevEnv: ## install required tools for dev
+	./scripts/local-dev-setup.sh
 
 # future, clone main and perform release on that vs stash/unstash
 .PHONY: release

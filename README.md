@@ -28,36 +28,9 @@ This contains the logic for your conventions. Each convention is part of variabl
 
 ## Pre-Requisites
 
-* [Golang 1.20+](https://go.dev/doc/install) - Convention Server is written in Golang.
+Run the script here to install required tools for building and releasing the convention server
 ```shell
-brew install go
-```
-* [Pack CLI](https://buildpacks.io/docs/tools/pack/) - Used to build image using Cloud Native Buildpacks.
-```shell
-brew install buildpacks/tap/pack
-```
-* [Set the default builder](https://buildpacks.io/docs/tools/pack/cli/pack_config_default-builder/)
-```shell
-pack config default-builder paketobuildpacks/builder-jammy-tiny
-```
-* [Tanzu CLI](https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.6/tap/install-tanzu-cli.html) - Used to install repository and packages on TAP cluster.
-```
-brew install vmware-tanzu/tanzu/tanzu-cli
-tanzu plugin install --group vmware-tap/default:v1.6.3
-```
-
-* [Kctrl CLI](https://github.com/carvel-dev/carvel) - Needed for bundling and releasing as a Carvel Package
-```shell
-brew install vmware-tanzu/carvel
-```
-
-* [jq](https://jqlang.github.io/jq/) - Utilized in build automation in the `Makefile`
-```shell
-brew install jq
-```
-* [gsed](https://formulae.brew.sh/formula/gnu-sed) - Utilized in build automation in the `Makefile`
-```shell
-brew install gsed
+./scripts/local-dev-setup.sh
 ```
 
 Logged into Staging Package Registry - Location to stage packaging.

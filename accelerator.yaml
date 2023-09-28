@@ -1,7 +1,7 @@
 accelerator:
   displayName: Convention Server Template
   description: Tanzu Application Platform Accelerator to create your own Convention Server for a Supply Chain
-  iconUrl: https://raw.githubusercontent.com/x95castle1/convention-server-accelerator/main/convention.jpeg
+  iconUrl: https://images.freecreatives.com/wp-content/uploads/2015/05/smiley-559124_640.jpg
   tags:
     - golang    
     - convention

@@ -19,6 +19,7 @@ MINOR_VERSION=$(shell echo $(LATEST_TAG) | cut -d. -f2)
 PATCH_VERSION=$(shell echo $(LATEST_TAG) | cut -d. -f3)
 NEW_MINOR_VERSION:= $(shell echo $$(($(MINOR_VERSION)+1)))
 NEXT_TAG=$(MAJOR_VERSION).$(NEW_MINOR_VERSION).$(PATCH_VERSION)
+GIT_URL := $(shell git config --get remote.origin.url)
 
 .PHONY: all
 all: test
@@ -145,6 +146,10 @@ commitGoDeps:
 .PHONY: sleep
 sleep:
 	sleep 3
+
+.PHONY: 
+applyacc:
+	tanzu acc create convention-server-template --git-repository $(GIT_URL) --interval 60s
 
 # future, clone main and perform release on that vs stash/unstash
 .PHONY: release

@@ -1,0 +1,13 @@
+apiVersion: accelerator.apps.tanzu.vmware.com/v1alpha1
+kind: Accelerator
+metadata:
+  name: ARTIFACT_ID_PLACEHOLDER
+  namespace: accelerator-system
+spec:
+  git:
+    gitImplementation: go-git
+    interval: 10m
+    ref:
+      branch: main
+    url: TODO_ADD_ME
+  iconUrl: https://images.freecreatives.com/wp-content/uploads/2015/05/smiley-559124_640.jpg

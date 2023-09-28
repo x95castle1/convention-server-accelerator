@@ -73,6 +73,7 @@ engine:
                 "install-server/**",
                 "carvel/**",
                 "examples/**",
+                "scripts/**",
                 ".gitignore"
     ]
       chain:

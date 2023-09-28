@@ -158,9 +158,14 @@ verifyDockerIsRunning:
         exit 1; \
     fi
 
+# this prunes the old packages from your Package repository. Keeps the last 5.
+.PHONY: pruneYourPackages
+pruneYourPackages:
+	./scripts/pruneYourPackages.sh
+
 # future, clone main and perform release on that vs stash/unstash
 .PHONY: release
-release: verifyDockerIsRunning stash updateGoDeps commitGoDeps build tag updateLatestTagVariable image sleep getLatestDigest updateTemplateImage package commitReleasedFiles promote stashPop ## perform a release
+release: verifyDockerIsRunning stash updateGoDeps commitGoDeps build tag updateLatestTagVariable image sleep getLatestDigest updateTemplateImage pruneYourPackages package commitReleasedFiles promote stashPop ## perform a release
 
 # Absolutely awesome: http://marmelab.com/blog/2016/02/29/auto-documented-makefile.html
 help: ## Print help for each make target

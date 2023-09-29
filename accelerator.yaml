@@ -68,7 +68,7 @@ engine:
                 "**/go.mod",
                 "**/go.sum",
                 "pkg/**/*.json",
-                "README.md",
+                "GENERATED_README.md",
                 "Makefile",
                 "install-server/**",
                 "carvel/**",
@@ -137,6 +137,10 @@ engine:
           substitutions:
             - text: CONVENTION_IMAGE_REGISTRY_HOST
               with: "#conventionImageRegistry.substring(0, #conventionImageRegistry.indexOf('/'))"
+        - type: RewritePath
+          regex: GENERATED_README.md
+          rewriteTo: README.md
+
 
 
               

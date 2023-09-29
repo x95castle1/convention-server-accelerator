@@ -139,7 +139,9 @@ engine:
               with: "#conventionImageRegistry.substring(0, #conventionImageRegistry.indexOf('/'))"
         - type: RewritePath
           regex: GENERATED_README.md
-          rewriteTo: README.md
+          rewriteTo: "'README.md'"
+        - type: UniquePath
+          strategy: UseLast
 
 
 

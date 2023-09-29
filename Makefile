@@ -147,7 +147,7 @@ commitGoDeps:
 sleep:
 	sleep 3
 
-.PHONY: 
+.PHONY: applyacc
 applyacc: ## install accelerator
 	tanzu acc create convention-server-template --git-repository $(GIT_URL) --interval 60s
 

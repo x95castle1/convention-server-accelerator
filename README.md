@@ -10,7 +10,7 @@ make applyw
 
 ## Component Overview
 
-packageLongDescription
+PACKAGE_LONG_DESCRIPTION_PLACEHOLDER
 
 ### server.go
 

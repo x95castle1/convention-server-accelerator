@@ -140,8 +140,7 @@ engine:
         - type: RewritePath
           regex: GENERATED_README.md
           rewriteTo: "'README.md'"
-        - type: UniquePath
-          strategy: UseLast
+
 
 
 
